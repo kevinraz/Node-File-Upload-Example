@@ -22,7 +22,6 @@ var URL = require('url');
 var api = require('./api/index.js');
 var ui = require('./ui/index.js');
 
-
 module.exports = {
 
 	config:{
@@ -45,6 +44,10 @@ module.exports = {
 	listen:function(port){
 		if(!port){
 			throw new Error('When calling listen, a port is required.');
+		}
+
+		if(port !== '18881'){
+			this.log('WARNING: Switch to port 18881 for final release', 'warn');
 		}
 
 		this.log('Starting HTTP server on port ' + port);
@@ -157,5 +160,10 @@ module.exports = {
 	dateTime:function(){
 		return (new Date()).toISOString();
 	}
-
 };
+
+// Add timestamp to error logging
+process.on('uncaughtException', function(err){
+	module.exports.log(err, 'error');
+	process.exit(1);
+});
