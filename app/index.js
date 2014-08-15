@@ -15,14 +15,8 @@
 
 // Include Dependency Modules
 var connect = require('connect');
-//var fs = require('fs');
 var http = require('http');
-//var mime = require('mime');
-//var PATH = require('path');
-//var qs = require('querystring');
 var URL = require('url');
-//var utils = require('util');
-//var _ = require('lodash');
 
 // Include API and UI
 var api = require('./api/index.js');
