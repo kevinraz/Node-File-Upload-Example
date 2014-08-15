@@ -12,6 +12,12 @@ API includes a RESTful file upload and download utility.
 git clone git@github.com:kevinraz/Node-File-Upload-Example.git
 ```
 
+
+### Start service:
+```bash
+node index.js
+```
+
 ## Outline
 Create a basic node.js program that provides a HTTP service listening on port 18881 which allows a HTTP client to create a new file object, then upload and download the file data for the file object.
 
