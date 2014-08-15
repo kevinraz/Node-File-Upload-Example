@@ -11,4 +11,5 @@
  */
 var app = require('./app/index.js');
 
+// TODO: Change this to port 18881 for final version.
 app.listen(3333);
