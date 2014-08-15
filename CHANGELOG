@@ -1,0 +1,6 @@
+v0.0.1:
+	date: 2014-08-14
+	changes:
+		- Initial build of 0.0.1
+		- HTTP server starts and passes request to API or UI based on path
+		- No RESTful operations or file upload methods have been implemented yet
