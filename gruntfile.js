@@ -14,7 +14,9 @@ module.exports = function (grunt) {
 			full: {
 				closurePath: 'bin/google-closure',
 				js: [
-					'./public/js/libs/jquery.js'
+					'./public/js/libs/jquery.js',
+					'./public/js/app/application.js'
+
 				],
 				jsOutputFile:'./public/js/application.min.js',
 				maxBuffer: 500,

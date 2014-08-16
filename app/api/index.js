@@ -58,9 +58,9 @@ module.exports = {
 
 			var controller = require(controllerPath);
 			if(controller[match[0].path.split('.')[1]]){
-				var output = controller[match[0].path.split('.')[1]](match[1]);
-				var options = output.options || {};
-				_this.end(output, options);
+				controller[match[0].path.split('.')[1]](match[1], function(output, options){
+					_this.end(output, options);
+				});
 			}else{
 				_this.notFound();
 			}

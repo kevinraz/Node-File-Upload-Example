@@ -14,11 +14,17 @@ var _ = require('lodash');
 module.exports = {
 	execute:function(params, cb){
 		var model = {
-			files:fs.readdirSync(path + '../../../../' + 'private/uploads/')
+			file:{}
 		};
-		_.each(model.files, function(file, i){
-			model.files[i] = file.replace(/(\.json)$/, '');
+		fs.readFile(path + '../../../../' + 'private/uploads/' + params.getfileId + '.json', 'utf8', function (err, data) {
+			if (err) {
+				console.log('Error: ' + err);
+				return;
+			}
+
+			data = JSON.parse(data);
+
+			cb(data);
 		});
-		cb( model );
 	}
 };

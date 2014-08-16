@@ -1,3 +1,82 @@
+html, body, #layout {
+	height: 100%;
+}
+
 body {
 	background:#f8f8f8;
+	.scrollbar(true);
+}
+
+.app, .file-pane {
+	min-height: 100%;
+}
+
+.file-pane {
+	position: absolute;
+	left: 0;
+	top:0;
+	bottom:0;
+	width:300px;
+
+	.box-shadow(inset 0 -1px 10px rgba(0,0,0,0.2));
+
+	.header {
+		.button {
+			padding: 20px;
+			a {
+				.btn;
+				.btnColor("primary");
+			}
+		}
+	}
+
+	.file-list {
+		ul {
+			padding:0 10px;
+		}
+		li {
+
+		}
+		a {
+			display: block;
+			padding:5px;
+			.border-radius(3px);
+
+			&:hover {
+				background: #FFF;
+			}
+
+			.icon {
+				.icon-file;
+				float: left;
+			}
+		}
+	}
+}
+
+.app-body {
+	position: absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:300px;
+
+	h1 {
+		color:#CCC;
+		font-family: 'LatoLight';
+		text-align: center;
+		font-size: 34px;
+		background: #FFF;
+		.border-radius(10px);
+		margin: 50px;
+	}
+
+	#editor {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
 }
