@@ -39,7 +39,7 @@ module.exports = {
 	 * listen
 	 * Call this from your app to start your server.
 	 *
-	 * @param port
+	 * @param {int} port
 	 */
 	listen:function(port){
 		if(!port){
@@ -51,6 +51,10 @@ module.exports = {
 		}
 
 		this.log('Starting HTTP server on port ' + port);
+
+		if(this.config.debug){
+			this.log('Running in DEBUG mode.', 'warn');
+		}
 
 		var app = connect()
 			.use(connect.timeout(600000))//timeout request in 2 minutes
@@ -66,6 +70,7 @@ module.exports = {
 				}
 			});
 
+		this.setupGlobals();
 		this.setupExitHandlers();
 		this.createServer(port, app);
 
@@ -78,12 +83,17 @@ module.exports = {
 	 * This is separate so if we decide to use cluster we can wrap
 	 * our connect server in the callback of a process manager.
 	 *
-	 * @param port
-	 * @param app
+	 * @param {int} port
+	 * @param {object} app
 	 * @returns {object}
 	 */
 	createServer:function(port, app){
 		return http.createServer(app).listen(port);
+	},
+
+
+	setupGlobals:function(){
+		GLOBAL.debug = this.config.debug;
 	},
 
 
