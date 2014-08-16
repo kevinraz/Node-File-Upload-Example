@@ -14,7 +14,7 @@ var _ = require('lodash');
 module.exports = {
 	execute:function(){
 		var model = {
-			files:fs.readdirSync(path + '../../../../' + 'public/uploads/')
+			files:fs.readdirSync(path + '../../../../' + 'private/uploads/')
 		};
 		_.each(model.files, function(file, i){
 			model.files[i] = file.replace(/(\.json)$/, '');

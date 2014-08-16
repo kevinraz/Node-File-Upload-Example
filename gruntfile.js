@@ -6,7 +6,7 @@ module.exports = function (grunt) {
 				options: {
 					compress: true
 				},
-				files: {'./public/stylesheets/app.css':'./public/stylesheets/less/_index.less'}
+				files: {'./public/styles/css/app.css':'./public/styles/less/_index.less'}
 
 			}
 		},
