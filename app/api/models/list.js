@@ -8,10 +8,17 @@
  * @author Kevin Razmus
  * @version 1.0.0
  */
+var fs = require('fs');
+var path = __dirname;
+var _ = require('lodash');
 module.exports = {
-	execute:function(params){
-		return [{
-			hello:'world' + params.getfileId
-		}];
+	execute:function(){
+		var model = {
+			files:fs.readdirSync(path + '../../../../' + 'public/uploads/')
+		};
+		_.each(model.files, function(file, i){
+			model.files[i] = file.replace(/(\.json)$/, '');
+		});
+		return model;
 	}
 };

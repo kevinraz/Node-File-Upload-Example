@@ -14,19 +14,23 @@ module.exports = {
 		method:'get'
 	},
 	'/files':{
-		path:'index.upload',
+		path:'index.create',
 		method:'post'
 	},
 	'/files/:getfileId':{
-		path:'index.details',
+		path:'index.read',
 		method:'get'
 	},
 	'/files/:putfileId/data':{
-		path:'index.createData',
+		path:'index.update',
 		method:'put'
 	},
 	'/files/:getfileId/data':{
 		path:'index.readData',
 		method:'get'
+	},
+	'/files/:deletefileId/data':{
+		path:'index.delete',
+		method:'delete'
 	}
 };

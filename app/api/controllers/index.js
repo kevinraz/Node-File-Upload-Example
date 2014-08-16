@@ -12,6 +12,10 @@ module.exports = {
 	home:function(){
 		return require('../models/list.js').execute();
 	},
+	create:function(){},
+	read:function(){},
+	update:function(){},
+	delete:function(){},
 
 	readData:function(params){
 		return require('../models/list.js').execute(params);
