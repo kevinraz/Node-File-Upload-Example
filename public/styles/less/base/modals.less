@@ -1,0 +1,92 @@
+/* --------------------------------------------------
+:: Modals
+-------------------------------------------------- */
+
+#modal-overlay{
+	display: none;
+	.opacity(50);
+	z-index: 2000;
+	background-color: #000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+}
+.modal-container{
+	z-index: 2001;
+	position: fixed;
+	width:90%;
+	left:50%;
+	top:50%;
+	margin-left: -45%;
+
+	&.small{
+		width:200px;
+		margin-left: -100px;
+	}
+	&.medium{
+		width:300px;
+		margin-left: -150px;
+	}
+
+	&.error{
+		.title{
+			color:#b22;
+			.icon{
+				.icon-warning;
+			}
+		}
+	}
+	&.info{
+		.title{
+			.icon{
+				.icon-info;
+			}
+		}
+	}
+
+	.footer .close {
+		.btn;
+		.btnColor("close");
+	}
+
+}
+
+.modal{
+	background-color: #fff;
+	border: 1px solid #a7b1b8;
+	outline: 10px solid #dde1e4;
+	margin: 10px;
+	//todo: this is wrong it should not use the .close class since it is used for all close links
+	.close{
+		.icon {
+			.icon-close;
+			position: absolute;
+			top: 25px;
+			right: 20px;
+			color: #b2b2b2;
+			font-size: 18px;
+		}
+	}
+	.title{
+		padding: 15px 10px;
+		font-size: 16px;
+	}
+	.body{
+		margin: 0 10px 20px;
+	}
+	.footer{
+		padding:0 10px;
+		.btn{
+			width:100%;
+			display: block;
+			margin-bottom:10px;
+			&.close{
+				//.btn-secondary;
+			}
+
+		}
+	}
+}

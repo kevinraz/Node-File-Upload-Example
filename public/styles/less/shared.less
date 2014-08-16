@@ -1,0 +1,80 @@
+html {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/**
+ * Fluid
+ * A table like structure that allows for dynamic width and sections.
+ */
+
+.fluid {
+	display: table;
+	width:100%;
+	margin-top:10px;
+	.box-sizing;
+
+	ul {
+		display: table-row;
+		.box-sizing;
+	}
+
+	li {
+		display: table-cell;
+		padding:10px;
+		vertical-align: middle;
+		.box-sizing;
+
+		&:last-child{
+			text-align:right;
+		}
+	}
+
+	.fluid-header {
+		display: table-header-group;
+		width:100%;
+		background:#f2f2f2;
+		border-bottom:1px solid #e5e5e5;
+		ul {
+
+		}
+		li {
+
+			padding:20px 10px;
+			font-size: 0.875em;
+			color:#666;
+		}
+	}
+
+	.fluid-body {
+		display: table-row-group;
+		ul {
+
+		}
+
+		li {
+			border-bottom:1px solid #e5e5e5;
+		}
+	}
+}
+
+
+::-webkit-scrollbar {
+	height: 10px;
+	overflow: visible;
+	width: 10px;
+}
+::-webkit-scrollbar-thumb {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	background-color: rgba(0,0,0,.2);
+	background-clip: padding-box;
+	border: solid transparent;
+	border-width: 1px 1px 1px 6px;
+	min-height: 28px;
+	padding: 100px 0 0;
+	box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);
+}
+::-webkit-scrollbar-button {
+	height: 0;
+	width: 0;
+}

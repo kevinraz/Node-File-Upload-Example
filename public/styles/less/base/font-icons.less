@@ -1,0 +1,331 @@
+/* --------------------------------------------------
+:: Font icons
+-------------------------------------------------- */
+
+@font-face {
+	font-family: 'icomoon';
+	src: url('../../fonts/icomoon.eot');
+	src: url('../../fonts/icomoon.eot?#iefix') format('embedded-opentype'), url('../../fonts/icomoon.woff') format('woff'), url('../../fonts/icomoon.ttf') format('truetype'), url('../../fonts/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	@font-face {
+		font-family: 'fontello';
+		src: url('../font/fontello.svg?6051550#fontello') format('svg');
+	}
+}
+*/
+
+/* [class^="icon-"](){&(){&(){&:before, [class*=" icon-"]:before, */
+i.icon:before {
+	font-family: "icomoon";
+	font-style: normal;
+	font-weight: normal;
+	speak: none;
+
+	display: inline-block;
+	text-decoration: inherit;
+	width: 1em;
+	margin-right: .2em;
+	text-align: center;
+	/* opacity: .8; */
+
+	/* For safety - reset parent styles, that can break glyph codes*/
+	font-variant: normal;
+	text-transform: none;
+
+	/* fix buttons height, for twitter bootstrap */
+	line-height: 1em;
+
+	/* Animation center compensation - margins should be symmetric */
+	/* remove if not needed */
+	margin-left: .2em;
+
+	/* you can be more comfortable with increased icons size */
+	/* font-size: 120%; */
+
+	/* Uncomment for 3D effect */
+	/* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+/*
+Search: :before[\s\S]*?\}
+Replace: (){&$0}
+*/
+
+/* --------------------------------------------------
+:: Individual icons
+-------------------------------------------------- */
+
+.icon-home(){&:before {
+	content: "\e600";
+}}
+.icon-image(){&:before {
+	content: "\e602";
+}}
+.icon-camera(){&:before {
+	content: "\e601";
+}}
+.icon-headphones(){&:before {
+	content: "\e608";
+}}
+.icon-film(){&:before {
+	content: "\e609";
+}}
+.icon-camera2(){&:before {
+	content: "\e60f";
+}}
+.icon-profile(){&:before {
+	content: "\e610";
+}}
+.icon-file(){&:before {
+	content: "\e603";
+}}
+.icon-copy(){&:before {
+	content: "\e604";
+}}
+.icon-stack(){&:before {
+	content: "\e611";
+}}
+.icon-folder(){&:before {
+	content: "\e605";
+}}
+.icon-folder-open(){&:before {
+	content: "\e606";
+}}
+.icon-tag(){&:before {
+	content: "\e607";
+}}
+.icon-barcode(){&:before {
+	content: "\e612";
+}}
+.icon-qrcode(){&:before {
+	content: "\e613";
+}}
+.icon-cart(){&:before {
+	content: "\e614";
+}}
+.icon-coin(){&:before {
+	content: "\e615";
+}}
+.icon-phone(){&:before {
+	content: "\e619";
+}}
+.icon-envelope(){&:before {
+	content: "\e61a";
+}}
+.icon-location(){&:before {
+	content: "\e60a";
+}}
+.icon-stopwatch(){&:before {
+	content: "\e621";
+}}
+.icon-calendar(){&:before {
+	content: "\e60b";
+}}
+.icon-screen(){&:before {
+	content: "\e60c";
+}}
+.icon-mobile(){&:before {
+	content: "\e60d";
+}}
+.icon-mobile2(){&:before {
+	content: "\e60e";
+}}
+.icon-bubble(){&:before {
+	content: "\e628";
+}}
+.icon-user(){&:before {
+	content: "\e629";
+}}
+.icon-users(){&:before {
+	content: "\e62c";
+}}
+.icon-search(){&:before {
+	content: "\e616";
+}}
+.icon-zoomin(){&:before {
+	content: "\e617";
+}}
+.icon-zoomout(){&:before {
+	content: "\e618";
+}}
+.icon-lock(){&:before {
+	content: "\e61b";
+}}
+.icon-unlocked(){&:before {
+	content: "\e61c";
+}}
+.icon-settings(){&:before {
+	content: "\e61d";
+}}
+.icon-equalizer(){&:before {
+	content: "\e61e";
+}}
+.icon-cog(){&:before {
+	content: "\e61f";
+}}
+.icon-dashboard(){&:before {
+	content: "\e620";
+}}
+.icon-accessibility(){&:before {
+	content: "\e62e";
+}}
+.icon-target(){&:before {
+	content: "\e62f";
+}}
+.icon-shield(){&:before {
+	content: "\e630";
+}}
+.icon-switch(){&:before {
+	content: "\e622";
+}}
+.icon-menu(){&:before {
+	content: "\e631";
+}}
+.icon-tree(){&:before {
+	content: "\e632";
+}}
+.icon-cloud(){&:before {
+	content: "\e623";
+}}
+.icon-cloud-download(){&:before {
+	content: "\e624";
+}}
+.icon-cloud-upload(){&:before {
+	content: "\e625";
+}}
+.icon-link(){&:before {
+	content: "\e626";
+}}
+.icon-attachment(){&:before {
+	content: "\e627";
+}}
+.icon-warning(){&:before {
+	content: "\e62a";
+}}
+.icon-notification(){&:before {
+	content: "\e62b";
+}}
+.icon-info(){&:before {
+	content: "\e62d";
+}}
+.icon-close(){&:before {
+	content: "\e633";
+}}
+.icon-checkmark(){&:before {
+	content: "\e634";
+}}
+.icon-checkmark2(){&:before {
+	content: "\e635";
+}}
+.icon-minus(){&:before {
+	content: "\e636";
+}}
+.icon-plus(){&:before {
+	content: "\e637";
+}}
+.icon-checkbox-checked(){&:before {
+	content: "\e638";
+}}
+.icon-checkbox-unchecked(){&:before {
+	content: "\e639";
+}}
+.icon-radio-checked(){&:before {
+	content: "\e63d";
+}}
+.icon-radio-unchecked(){&:before {
+	content: "\e63e";
+}}
+.icon-filter(){&:before {
+	content: "\e640";
+}}
+.icon-embed(){&:before {
+	content: "\e63a";
+}}
+.icon-code(){&:before {
+	content: "\e63b";
+}}
+.icon-console(){&:before {
+	content: "\e63c";
+}}
+.icon-mail(){&:before {
+	content: "\e641";
+}}
+.icon-googleplus(){&:before {
+	content: "\e642";
+}}
+.icon-facebook(){&:before {
+	content: "\e643";
+}}
+.icon-twitter(){&:before {
+	content: "\e644";
+}}
+.icon-feed(){&:before {
+	content: "\e645";
+}}
+.icon-vimeo2(){&:before {
+	content: "\e646";
+}}
+.icon-dribbble(){&:before {
+	content: "\e648";
+}}
+.icon-github(){&:before {
+	content: "\e649";
+}}
+.icon-tux(){&:before {
+	content: "\e64a";
+}}
+.icon-apple(){&:before {
+	content: "\e64b";
+}}
+.icon-android(){&:before {
+	content: "\e64c";
+}}
+.icon-windows8(){&:before {
+	content: "\e651";
+}}
+.icon-skype(){&:before {
+	content: "\e658";
+}}
+.icon-linkedin(){&:before {
+	content: "\e652";
+}}
+.icon-html5(){&:before {
+	content: "\e653";
+}}
+.icon-target2(){&:before {
+	content: "\e63f";
+}}
+.icon-database(){&:before {
+	content: "\e654";
+}}
+.icon-statistics(){&:before {
+	content: "\e655";
+}}
+.icon-minus2(){&:before {
+	content: "\e656";
+}}
+.icon-plus2(){&:before {
+	content: "\e657";
+}}
+.icon-erase(){&:before {
+	content: "\e647";
+}}
+.icon-arrow-left(){&:before {
+	content: "\e64d";
+}}
+.icon-arrow-down(){&:before {
+	content: "\e64e";
+}}
+.icon-arrow-up(){&:before {
+	content: "\e64f";
+}}
+.icon-arrow-right(){&:before {
+	content: "\e650";
+}}

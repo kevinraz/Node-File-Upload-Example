@@ -1,0 +1,66 @@
+.alert-container{
+	position: fixed;
+	z-index: 2100;
+	width: 100%;
+	.box-sizing;
+	background-color: #fff;
+	padding: 11px 30px 11px 20px;
+	.drop-shadow;
+
+	ul,li {
+		margin:0;
+		padding:0;
+		list-style: none;
+	}
+
+	li:not(:first-child) {
+		padding-top:10px;
+	}
+
+	.close-btn{
+		position: absolute;
+		top:12px;
+		right: 5px;
+		color: #b2b2b2;
+		.icon {
+			.opacity(50);
+			.icon-close;
+			font-size: 14px;
+		}
+	}
+	&.notice{
+		background-color: #ffc;
+		color:#000;
+		.close-btn{
+			color: #000;
+		}
+
+	}
+	&.info{
+		background-color: #ddf;
+		color:#000;
+		.close-btn{
+			color: #000;
+		}
+
+	}
+	&.error{
+		background-color: #fcc;
+		color:#b22;
+		.close-btn{
+			color: #b22;
+		}
+		pre{
+			overflow: auto;
+			-webkit-overflow-scrolling: touch;
+		}
+	}
+	&.success{
+		background-color: #cfc;
+		color:#000;
+		.close-btn{
+			color: #000;
+		}
+
+	}
+}

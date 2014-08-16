@@ -1,0 +1,42 @@
+@loader-bg-color:#eee;
+.loader-container{
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: @loader-bg-color;
+}
+.loader {
+	height:60px;
+	width:60px;
+	margin:50px auto;
+	position:relative;
+	-webkit-animation: rotation 1s infinite linear;
+	-moz-animation: rotation 1s infinite linear;
+	-o-animation: rotation 1s infinite linear;
+	animation: rotation 1s infinite linear;
+	border-left:6px solid rgba(0,0,0,.15);
+	border-right:6px solid rgba(0,0,0,.15);
+	border-bottom:6px solid rgba(0,0,0,.15);
+	border-top:6px solid rgba(0,0,0,.8);
+	border-radius:100%;
+}
+
+@-webkit-keyframes rotation {
+	from {-webkit-transform: rotate(0deg);}
+	to {-webkit-transform: rotate(359deg);}
+}
+
+@-moz-keyframes rotation {
+	from {-moz-transform: rotate(0deg);}
+	to {-moz-transform: rotate(359deg);}
+}
+
+@-o-keyframes rotation {
+	from {-o-transform: rotate(0deg);}
+	to {-o-transform: rotate(359deg);}
+}
+
+@keyframes rotation {
+	from {transform: rotate(0deg);}
+	to {transform: rotate(359deg);}
+}
