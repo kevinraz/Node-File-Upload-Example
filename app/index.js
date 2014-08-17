@@ -46,7 +46,7 @@ module.exports = {
 			throw new Error('When calling listen, a port is required.');
 		}
 
-		if(port !== '18881'){
+		if(port !== 18881){
 			this.log('WARNING: Switch to port 18881 for final release', 'warn');
 		}
 

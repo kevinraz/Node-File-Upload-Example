@@ -25,7 +25,7 @@ module.exports = {
 		this.app.request.on('end', function() {
 			// parse the received body data
 			var decodedBody = querystring.parse(fullBody);
-
+			decodedBody.name = decodedBody.name.replace(/%20| /g, '');
 			if(decodedBody.name && decodedBody.name.match(/^[\w\-. ]+$/)){
 				var pathname = path + '../../../../' + 'private/uploads/' + decodedBody.name + '.json';
 				fs.exists(pathname, function(exists) {
@@ -40,13 +40,7 @@ module.exports = {
 							description:decodedBody.description,
 							"Content-Type": mime.lookup(decodedBody.name)
 						};
-						fs.writeFile(pathname, JSON.stringify(fileData, null, 4), function(err) {
-							if(err) {
-								console.log(err);
-							} else {
-								console.log("JSON saved to " + pathname);
-							}
-						});
+						fs.writeFile(pathname, JSON.stringify(fileData, null, 4));
 						model = {
 							view:'createData',
 							fileData:fileData

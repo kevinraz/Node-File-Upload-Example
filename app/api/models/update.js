@@ -25,7 +25,7 @@ module.exports = {
 		this.app.request.on('end', function() {
 			// parse the received body data
 			var decodedBody = querystring.parse(fullBody);
-
+			decodedBody.name = (decodedBody.name || '').replace(/%20| /g, '');
 			if(params.putfileId && params.putfileId.match(/^[\w\-. ]+$/)){
 				var pathname = path + '../../../../' + 'private/uploads/' + params.putfileId + '.json';
 				fs.exists(pathname, function(exists) {
@@ -41,12 +41,15 @@ module.exports = {
 							}
 							var fileData = JSON.parse(data);
 							fileData.content = decodedBody.fileData;
+							fileData.description = decodedBody.description;
+
+							if(decodedBody.name && params.putfileId !== decodedBody.name){
+								fs.unlink(pathname);
+								pathname = path + '../../../../' + 'private/uploads/' + decodedBody.name + '.json';
+								fileData.fileId = decodedBody.name;
+							}
+
 							fs.writeFile(pathname, JSON.stringify(fileData, null, 4), function(err) {
-								if(err) {
-									console.log(err);
-								} else {
-									console.log("JSON saved to " + pathname);
-								}
 								cb({
 									view:'read',
 									fileData:fileData

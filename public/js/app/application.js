@@ -106,7 +106,7 @@ var app = {
 			afterRender:function(){
 				app.editor = ace.edit("editor");
 				app.editor.setTheme("ace/theme/chrome");
-				app.editor.getSession().setMode("ace/mode/javascript");
+				app.editor.getSession().setMode("ace/mode/text");
 			},
 			close:function(){
 				app.editor.destroy();
@@ -180,6 +180,7 @@ var app = {
 				var url = $form.attr('action');
 				var method = $form.attr('method');
 				var data = $form.serialize();
+				var $btn = $form.find('.create-btn').data('filename');
 				data += '&fileData=' + app.editor.getSession().getValue();
 
 				app.fetch({
@@ -190,6 +191,7 @@ var app = {
 						'Content-Type':$('[name="Content-Type"]').val()
 					}
 				}, function(data){
+					$('[data-filename="'+$btn+'"] a').html('<i class="icon"></i>' + $form.find('#name').val().replace(/%20| /g, ''));
 					app.render({
 						$el:$('.app-body'),
 						view:data.view,
