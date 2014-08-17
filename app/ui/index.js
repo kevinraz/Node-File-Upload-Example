@@ -9,14 +9,14 @@
  * @version 1.0.0
  */
 var fs = require('fs');
-var PATH = require('path');
+//var PATH = require('path');
 module.exports = {
 	run:function(request, response, pathname){
-		pathname = pathname;
-		if (fs.statSync(pathname).isDirectory()) {
-			pathname = '/public/' + pathname.replace(/(\/)$/, '') + '/index.html';
-		}
 		fs.exists(pathname, function(exists) {
+
+			/*if (fs.statSync(pathname).isDirectory()) {
+				pathname = '/public/' + pathname.replace(/(\/)$/, '') + '/index.html';
+			}*/
 
 			if(!exists) {
 				response.writeHead(404, {"Content-Type": "text/html"});
@@ -38,7 +38,5 @@ module.exports = {
 				response.end();
 			});
 		});
-
-		//response.end('UI path called: ' + pathname);
 	}
 };

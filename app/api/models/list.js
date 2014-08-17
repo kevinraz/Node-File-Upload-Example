@@ -2,6 +2,7 @@
  * Node.js File Upload Example
  *
  * /app/api/models/list.js
+ * Opens private file dir and outputs an array of file names.
  *
  *
  * @package Example

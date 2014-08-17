@@ -29,6 +29,10 @@ module.exports = {
 		path:'index.readData',
 		method:'get'
 	},
+	'/download/files/:getfileId':{
+		path:'index.downloadData',
+		method:'get'
+	},
 	'/files/:deletefileId/data':{
 		path:'index.delete',
 		method:'delete'

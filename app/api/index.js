@@ -42,12 +42,12 @@ module.exports = {
 		var _this = this;
 		var controllerPath = '';
 		pathname = pathname.replace(/^\/api/, '');
-
 		match = _this.matchUrl(pathname,routes);
 
 		if(match[0] && match[0].path){
 			controllerPath = path + '/controllers/' +match[0].path.split('.')[0] + '.js';
 		}
+
 		fs.exists(controllerPath, function(exists){
 			_this.isAllowed(match[0]);
 
@@ -58,7 +58,7 @@ module.exports = {
 
 			var controller = require(controllerPath);
 			if(controller[match[0].path.split('.')[1]]){
-				controller[match[0].path.split('.')[1]](match[1], function(output, options){
+				controller[match[0].path.split('.')[1]].call(_this, match[1], function(output, options){
 					_this.end(output, options);
 				});
 			}else{

@@ -25,7 +25,7 @@ var ui = require('./ui/index.js');
 module.exports = {
 
 	config:{
-		debug:true,
+		debug:false,
 		logging: {
 			message: true,
 			warn:true,
@@ -63,7 +63,7 @@ module.exports = {
 			.use(function(request, response){
 				var pathname = URL.parse(request.url).pathname;
 
-				if(pathname.indexOf('/api') > -1){
+				if(pathname.indexOf('/api') > -1 || pathname.match(/download\/files\/([\w\-. ]+)/)){
 					api.run(request, response, pathname);
 				}else{
 					ui.run(request, response, pathname)

@@ -1,4 +1,8 @@
-v0.0.1:
+v1.0.0:
+	date: 2014-08-16
+	changes:
+		- Added app API and UI
+		- Built minimal SPA
 	date: 2014-08-14
 	changes:
 		- Initial build of 0.0.1

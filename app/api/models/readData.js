@@ -1,7 +1,7 @@
 /**
  * Node.js File Upload Example
  *
- * /app/api/models/read.js
+ * /app/api/models/readData.js
  *
  *
  * @package Example
@@ -10,6 +10,7 @@
  */
 var fs = require('fs');
 var path = __dirname;
+var mime = require('mime');
 var _ = require('lodash');
 module.exports = {
 	execute:function(params, cb){
@@ -18,9 +19,12 @@ module.exports = {
 				console.log('Error: ' + err);
 				return;
 			}
+			var fileData = JSON.parse(data);
 			cb({
-				view:'read',
-				fileData:JSON.parse(data)
+				fileData:fileData,
+				view:'readData'
+			}, {
+				contentType:mime.lookup(fileData.fileId)
 			});
 		});
 	}

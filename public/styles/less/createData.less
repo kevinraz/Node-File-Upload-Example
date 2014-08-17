@@ -1,0 +1,60 @@
+.create-data-page {
+	.page-body {
+		position: absolute;
+		top: 100px;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	.button {
+		position: absolute;
+		bottom:20px;
+		right:20px;
+
+		.create-btn {
+			.btn;
+			.btnColor("secondary");
+		}
+
+		.back {
+			.btn;
+			.btnColor("secondary");
+			float: left;
+			margin-right: 5px;
+		}
+	}
+
+	.file-info {
+		.name {
+			strong {
+				color:#999;
+			}
+			strong:nth-child(2){
+				display: inline-block;
+				padding-left:10px;
+			}
+		}
+		.description {
+			color:#CCC;
+			font-family: 'LatoRegularItalic';
+		}
+	}
+
+	#editor {
+		position: absolute;
+		top: 75px;
+		right: 20px;
+		bottom: 100px;
+		left: 20px;;
+	}
+
+	&.update {
+
+		#editor {
+			top: 175px;
+		}
+
+	}
+
+}

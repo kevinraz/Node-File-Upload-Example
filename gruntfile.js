@@ -15,6 +15,7 @@ module.exports = function (grunt) {
 				closurePath: 'bin/google-closure',
 				js: [
 					'./public/js/libs/jquery.js',
+					'./public/js/libs/lodash.js',
 					'./public/js/app/application.js'
 
 				],
