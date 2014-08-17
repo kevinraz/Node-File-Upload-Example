@@ -17,6 +17,7 @@ git clone git@github.com:kevinraz/Node-File-Upload-Example.git
 ```bash
 cd /projects/Node-File-Upload-Example/
 node index.js
+Open URL: http://localhost:18881/
 ```
 
 ## Outline
