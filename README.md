@@ -23,7 +23,7 @@ node index.js
 Open URL: http://localhost:18881/
 ```
 
-## Outline
+## Task 1
 Create a basic node.js program that provides a HTTP service listening on port 18881 which allows a HTTP client to create a new file object, then upload and download the file data for the file object.
 
 The service should meet the following minimum requirements:
@@ -47,3 +47,10 @@ The service should meet the following minimum requirements:
 - File data should be retrieved from the local disk in the GET request.
 - You may choose how the service stores file object properties name and extension.
 
+
+## Task 2
+Create a basic node.js program that acts as a client to the HTTP service you created above. The client be able to:
+
+- For each file in a specified directory:
+  - Send an HTTP request to create a new file object on the server, specifying the name and extension of the current local file.
+  - Send an HTTP request to upload the local file.

@@ -59,6 +59,9 @@ module.exports = {
 		var app = connect()
 			.use(connect.timeout(600000))//timeout request in 2 minutes
 			.use(connect.cookieParser())
+			.use(connect.multipart())
+//			.use(connect.bodyParser())
+			.use(connect.query())
 			.use(connect.static('public'))
 			.use(function(request, response){
 				var pathname = URL.parse(request.url).pathname;

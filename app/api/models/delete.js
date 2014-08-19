@@ -20,11 +20,23 @@ module.exports = {
 						error:['File does not exist.']
 					});
 				}else{
-					fs.unlink(pathname, function(){
-						cb({
-							view:'removed'
+					fs.readFile(pathname, 'utf8', function (err, data) {
+						if (err) {
+							console.log('Error: ' + err);
+							return;
+						}
+						var fileData = JSON.parse(data);
+
+						fs.unlink(pathname, function(){
+							fs.unlink(path + '../../../../' + 'private/files/' + fileData.fileName, function(){
+								cb({
+									view:'removed'
+								});
+							});
 						});
+
 					});
+
 				}
 			});
 		}else{

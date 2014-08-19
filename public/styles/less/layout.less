@@ -5,6 +5,17 @@ html, body, #layout {
 body {
 	background:#f8f8f8;
 	.scrollbar(true);
+
+	.drag-hover.drag-hover-block {
+		position: fixed;
+		top:0;
+		right:0;
+		bottom:0;
+		left:300px;
+		background:rgba(255,255,255,0.6);
+		border: 10px dashed #ccc;
+		margin: 20px;
+	}
 }
 
 .app, .file-pane {
@@ -39,8 +50,9 @@ body {
 		}
 		a {
 			display: block;
-			padding:5px;
+			padding:5px 5px 5px 30px;
 			.border-radius(3px);
+			.word-wrap();
 
 			&:hover {
 				background: #FFF;
@@ -48,7 +60,8 @@ body {
 
 			.icon {
 				.icon-file;
-				float: left;
+				position: absolute;
+				left:15px;
 			}
 		}
 	}

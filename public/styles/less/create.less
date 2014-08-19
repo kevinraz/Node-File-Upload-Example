@@ -1,4 +1,7 @@
 .create-page {
+	.button {
+		padding:0;
+	}
 	button {
 		.btn;
 		.btnColor("secondary");
@@ -19,5 +22,66 @@
 		p:first-child{
 			padding:0;
 		}
+	}
+
+	p.filename {
+		.box-sizing;
+		.placeholder();
+		.border-radius(5px);
+		//.grad-2(#efefef,#ffffff);
+		padding: 0 10px;
+		width: 100%;
+		height: 36px;
+		line-height: 36px;
+		color: #333;
+		font-family: 'LatoRegularItalic';
+		font-size: @input-font-size;
+		background: #f1f1f1;
+	}
+
+	fieldset {
+		padding: 1em;
+		font:sans-serif;
+		border:1px solid #CCC;
+		margin-bottom:20px;
+	}
+	legend {
+		padding: 0.2em 0.5em;
+		border:1px solid #CCC;
+		color:#CCC;
+		font-size:90%;
+		text-align:left;
+	}
+
+	.drop-area {
+		border: 10px dashed #ccc;
+		width: 300px;
+		min-height: 300px;
+		margin: 20px auto;
+
+		&.hover {
+			border: 10px dashed #0c0;
+		}
+		p {
+			margin: 10px;
+			font-size: 14px;
+		}
+	}
+
+	progress {
+		width: 100%;
+		&:after {
+			content: '%';
+		}
+	}
+
+	.fail {
+		background: #c00;
+		padding: 2px;
+		color: #fff;
+	}
+
+	.hidden {
+		display: none !important;
 	}
 }

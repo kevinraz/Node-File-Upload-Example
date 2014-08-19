@@ -51,28 +51,165 @@ var app = {
 		},
 		create:{
 			events:{
-				'submit form':'submitForm'
+				'submit form':'submitForm',
+				'dragover body': 'dragOver',
+				'dragend body': 'dragEnd',
+				'drop body': 'onDrop'
 			},
 			submitForm:function(e){
+				var _this = this;
 				var $form = $(e.currentTarget);
 				var url = $form.attr('action');
 				var method = $form.attr('method');
 
-				app.fetch({
-					url:url,
-					method:method,
-					data:$form.serialize()
-				}, function(data){
-					$('.file-list ul').prepend(app.templates['file-list-item']({files:[data.fileData.fileId]}));
-					app.bindEvents('home');
-					app.render({
-						$el:$('.app-body'),
-						view:data.view,
-						data:data
-					});
-				});
+				if($form.find('button').attr('disabled') !== undefined){
+					return false;
+				}
 
+				if($form.hasClass('manual-create')){
+					app.fetch({
+						url:url,
+						method:method,
+						data:$form.serialize()
+					}, function(data){
+						$('.file-list ul').prepend(app.templates['file-list-item']({files:[data.fileData.fileId]}));
+						app.bindEvents('home');
+						app.render({
+							$el:$('.app-body'),
+							view:data.view,
+							data:data
+						});
+					});
+				}else{
+					app.fetch({
+						url:url,
+						method:method,
+						data:$form.serialize()
+					}, function(data){
+						if (_this.tests.formData) {
+							var redirect = 'view';
+							if(!_.isArray(data.fileData)){
+								data.fileData = [data.fileData];
+								redirect = 'file';
+							}
+							_.each(data.fileData, function(file,i){
+
+								if(!$('.file-list ul a:contains(file.fileId)').length){
+									$('.file-list ul').prepend(app.templates['file-list-item']({files:[file.fileId]}));
+									app.bindEvents('home');
+								}
+
+								var $progress = $('.upload-progress');
+								var xhr = new XMLHttpRequest();
+								xhr.open('PUT', '/api/files/' + file.fileId + '/data');
+								xhr.setRequestHeader("Content-type",'application/x-www-form-urlencoded'/*file['Content-Type']*/);
+								xhr.setRequestHeader('api-key','kUom8sAaqB94NobFZpHibphC1x1iO7L1');
+								xhr.onload = function () {
+									console.log('done?');
+									$progress.html(100);
+									$progress.val(100);
+
+									if(redirect === 'file'){
+										app.render({
+											$el:$('.app-body'),
+											view:'read',
+											data:{
+												fileData:file
+											}
+										});
+									}
+
+								};
+
+								if (_this.tests.progress) {
+									xhr.upload.onprogress = function (event) {
+										if (event.lengthComputable) {
+											var complete = (event.loaded / event.total * 100 | 0);
+											$progress.html(complete);
+											$progress.val(complete);
+											console.log(complete);
+										}
+									}
+								}
+
+								xhr.send(_this.formData);
+							});
+						}
+					});
+				}
 				return false;
+			},
+			dragOver:function(){
+				$('body').addClass('drag-hover');
+				return false;
+			},
+			dragEnd:function(){
+				$('body').removeClass('drag-hover');
+				return false;
+			},
+			onDrop:function(e){
+				$('body').removeClass('drag-hover');
+				$('.upload-btn').removeAttr('disabled');
+				this.uploadFiles(e.originalEvent.dataTransfer.files);
+				return false;
+			},
+			uploadFiles:function(files) {
+				console.log(files);
+				this.formData = this.tests.formData ? new FormData() : null;
+				for (var i = 0; i < files.length; i++) {
+					if (this.tests.formData) this.formData.append('file', files[i]);
+					this.showFileName(files[i]);
+				}
+				return false;
+			},
+			showFileName: function (file) {
+				var fileform= '<div class="input">';
+				fileform += '<label>File Name</label>';
+				fileform += '<p class="filename">' + file.name + ' (' + (file.size ? (file.size / 1024 | 0) + 'K' : '') + ')</p>';
+				fileform += '<label for="description">File Description</label>';
+				fileform += '<input type="text" name="description[]"/>';
+				fileform += '<input type="hidden" name="filename[]" value="'+file.name+'" />';
+				fileform += '</div>';
+				$('.upload-file-list').append(fileform);
+			},
+			afterRender:function(){
+				var _this = this;
+				var $dropArea = $('.drop-area');
+				var $fileUpload = $('.upload');
+
+				this.tests = {
+					filereader: typeof FileReader != 'undefined',
+					dnd: 'draggable' in document.createElement('span'),
+					formData: !!window.FormData,
+					progress: "upload" in new XMLHttpRequest
+				};
+
+				if (!this.tests.dnd) {
+					$dropArea.hide();
+					$fileUpload.show();
+					/*$fileUpload.querySelector('input').onchange = function () {
+						readfiles(this.files);
+					};*/
+				}
+
+				var support = {
+					filereader: $('.file-reader'),
+					formData: $('.form-data'),
+					progress: $('.progress')
+				};
+
+				"filereader formData progress".split(' ').forEach(function (api) {
+					if (_this.tests[api] === false) {
+						support[api].addClass('fail');
+					} else {
+						support[api].addClass('hidden');
+					}
+				});
+			},
+			close:function(){
+				$('body').off('drop');
+				this.formData = null;
+				delete this;
 			}
 		},
 		createData:{
@@ -214,9 +351,7 @@ var app = {
 		},
 		removed:{}
 	},
-	utils:{
 
-	},
 	fetch:function(options, cb){
 		options = _.extend({
 			url: '',
@@ -247,7 +382,7 @@ var app = {
 	bindEvents:function(viewName){
 		_.each(app.views[viewName].events, function(funcName, binding){
 			var ev = binding.split(/ (.+)?/);
-			$(ev[1]).off(ev[0], app.views[viewName][funcName]).on(ev[0], app.views[viewName][funcName]);
+			$(ev[1]).off(ev[0], app.views[viewName][funcName]).on(ev[0], app.views[viewName][funcName].bind(app.views[viewName]));
 		});
 	},
 	unbindEvents:function(viewName){
@@ -302,7 +437,10 @@ var app = {
 		});
 	},
 	templates:{},
-	validate:function(){
-
-	}
+	validate:function(){}
 };
+
+
+
+
+

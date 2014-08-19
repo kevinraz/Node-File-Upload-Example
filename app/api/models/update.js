@@ -15,11 +15,12 @@ var querystring = require('querystring');
 var mime = require('mime');
 module.exports = {
 	execute:function(params, cb){
+		var _this = this;
 		var model = {};
 		var fullBody = '';
 
 		this.app.request.on('data', function(chunk) {
-			fullBody += chunk.toString();
+			fullBody += chunk;
 		});
 
 		this.app.request.on('end', function() {
@@ -49,13 +50,23 @@ module.exports = {
 								fileData.fileId = decodedBody.name;
 							}
 
-							fs.writeFile(pathname, JSON.stringify(fileData, null, 4), function(err) {
-								cb({
-									view:'read',
-									fileData:fileData
-								});
+							if(fileData.manualFile){
+								fs.writeFile(pathname, JSON.stringify(fileData, null, 4), function(err) {
+									cb({
+										view:'read',
+										fileData:fileData
+									});
 
-							});
+								});
+							}else{
+								var file = fs.createWriteStream('private/files/' + fileData.fileName);
+								file.write(fullBody, function(){
+									cb({
+										view:'read',
+										fileData:fileData
+									});
+								});
+							}
 						});
 					}
 				});
