@@ -71,13 +71,15 @@ var app = {
 						url:url,
 						method:method,
 						data:$form.serialize()
-					}, function(data){
-						$('.file-list ul').prepend(app.templates['file-list-item']({files:[data.fileData.fileId]}));
-						app.bindEvents('home');
+					}, function(file){
+						if(!$('.file-list ul a:contains(file.fileId)').length){
+							$('.file-list ul').prepend(app.templates['file-list-item']({files:[file.fileData.fileId]}));
+							app.bindEvents('home');
+						}
 						app.render({
 							$el:$('.app-body'),
-							view:data.view,
-							data:data
+							view:file.view,
+							data:file
 						});
 					});
 				}else{
@@ -217,6 +219,7 @@ var app = {
 				'submit form':'submitForm'
 			},
 			submitForm:function(e){
+				var _this = this;
 				var $form = $(e.currentTarget);
 				var url = $form.attr('action');
 				var method = $form.attr('method');
@@ -225,7 +228,8 @@ var app = {
 					url:url,
 					method:method,
 					data:{
-						fileData:app.editor.getSession().getValue()
+						fileData:app.editor.getSession().getValue(),
+						description:_this.model.fileData.description
 					},
 					headers:{
 						'Content-Type':$('[name="Content-Type"]').val()
@@ -361,6 +365,7 @@ var app = {
 
 		if(options.headers && !options.headers['api-key']){
 			options.headers['api-key'] = 'kUom8sAaqB94NobFZpHibphC1x1iO7L1';
+			options.headers['async'] = true;
 		}
 		$.ajax(options)
 			.done(function(result) {

@@ -120,7 +120,10 @@ module.exports = {
 	isAllowed:function(route){
 		var message = '';
 		var code;
-		if(!debug && !this.app.request.headers['api-key'] && this.app.request.url.indexOf('/download') !== 0){
+		if(
+			(!debug && !this.app.request.headers['api-key'] && this.app.request.url.indexOf('/download') !== 0) &&
+				(!this.app.request.url.indexOf(/files\/([\w\-. ]+)\/data]/) > -1 && !this.app.request.headers['api-key'] && this.app.request.headers['async'] === true)
+			){
 			code = 403;
 			message = '403 Permission Denied: Missing API Key.';
 		}

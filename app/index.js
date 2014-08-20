@@ -66,7 +66,7 @@ module.exports = {
 			.use(function(request, response){
 				var pathname = URL.parse(request.url).pathname;
 
-				if(pathname.indexOf('/api') > -1 || pathname.match(/download\/files\/([\w\-. ]+)/)){
+				if(pathname.indexOf('/api') > -1 || request.headers.async !== "true"){
 					api.run(request, response, pathname);
 				}else{
 					ui.run(request, response, pathname)

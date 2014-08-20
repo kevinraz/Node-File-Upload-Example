@@ -145,12 +145,10 @@
 					<p><strong>Uploaded:</strong> <%=new Date(data.fileData.created).toLocaleString()%></p>
 					<p><strong>Description: </strong> <%=data.fileData.description%></p>
 					<div class="options">
-						<%if(data.manualFile){%>
+						<%if(data.fileData.manualFile !== false){%>
 							<p><a class="view-file-data" href="/files/<%=data.fileData.fileId%>/data">View/Edit File Data</a></p>
-							<p><a target="_blank" href="/download/files/<%=data.fileData.fileId%>">Download File</a></p>
-						<%}else{%>
-							<p><a target="_blank" href="/files/<%=data.fileData.fileId%>/data">Download</a></p>
 						<%}%>
+							<p><a target="_blank" href="/files/<%=data.fileData.fileId%>/data">Download</a></p>
 						<p><a class="delete-file" data-filename="<%=data.fileData.fileId%>" href="/files/<%=data.fileData.fileId%>/data">Delete File</a></p>
 					</div>
 				</div>

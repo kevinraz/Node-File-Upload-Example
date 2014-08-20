@@ -14,18 +14,34 @@ var mime = require('mime');
 var _ = require('lodash');
 module.exports = {
 	execute:function(params, cb){
+		var _this = this;
 		fs.readFile(path + '../../../../' + 'private/uploads/' + params.getfileId + '.json', 'utf8', function (err, data) {
 			if (err) {
 				console.log('Error: ' + err);
 				return;
 			}
 			var fileData = JSON.parse(data);
-			cb({
-				fileData:fileData,
-				view:'readData'
-			}, {
-				contentType:mime.lookup(fileData.fileId)
-			});
+			if(_this.app.request.headers.async === "true"){
+				cb({
+					fileData:fileData,
+					view:'readData'
+				}, {
+					contentType:mime.lookup(fileData.fileId)
+				});
+			}else{
+				var file = '';
+				_this.app.response.setHeader('Content-disposition', 'attachment; filename=' + fileData.fileId);
+				_this.app.response.setHeader('Content-type', fileData['Content-Type']);
+				if(fileData.manualFile){
+					_this.app.response.end(fileData.content);
+				}else if(fileData.fileName){
+					var filestream = fs.createWriteStream(path + '../../../../' + 'private/files/' +fileData.fileName);
+					//file = filestream.pipe(filestream);
+					_this.app.response.pipe(filestream);
+					_this.app.response.end();
+				}
+				return false;
+			}
 		});
 	}
 };
