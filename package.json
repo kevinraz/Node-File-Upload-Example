@@ -6,9 +6,12 @@
   },
   "dependencies": {
     "lodash": "~2.4.1",
-    "connect": "~2.19.6",
+    "connect": "~2.22.0",
     "mime": "~1.2.11",
-    "async": "~0.9.0"
+    "async": "~0.9.0",
+    "multiparty": "~3.3.2",
+    "instancejs-process-manager": "~0.1.17",
+    "formidable": "~1.0.15"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

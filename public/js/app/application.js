@@ -9,7 +9,7 @@ $(function() {
 		if(result.files && result.files.length){
 			$('.file-list ul').append(app.templates['file-list-item'](result));
 		}else{
-			$('.file-list ul').append('<li style="text-align: center">No Files Found.</li>');
+			$('.file-list ul').append('<li class="no-files" style="text-align: center">No Files Found.</li>');
 		}
 		app.bindEvents('home');
 	});
@@ -70,9 +70,11 @@ var app = {
 					app.fetch({
 						url:url,
 						method:method,
-						data:$form.serialize()
+						data:$form.serialize(),
+						contentType:false
 					}, function(file){
 						if(!$('.file-list ul a:contains(file.fileId)').length){
+							$('.no-files').remove();
 							$('.file-list ul').prepend(app.templates['file-list-item']({files:[file.fileData.fileId]}));
 							app.bindEvents('home');
 						}
@@ -86,7 +88,8 @@ var app = {
 					app.fetch({
 						url:url,
 						method:method,
-						data:$form.serialize()
+						data:$form.serialize(),
+						contentType:false
 					}, function(data){
 						if (_this.tests.formData) {
 							var redirect = 'view';
@@ -96,20 +99,22 @@ var app = {
 							}
 							_.each(data.fileData, function(file,i){
 
-								if(!$('.file-list ul a:contains(file.fileId)').length){
-									$('.file-list ul').prepend(app.templates['file-list-item']({files:[file.fileId]}));
-									app.bindEvents('home');
-								}
+
 
 								var $progress = $('.upload-progress');
 								var xhr = new XMLHttpRequest();
 								xhr.open('PUT', '/api/files/' + file.fileId + '/data');
-								xhr.setRequestHeader("Content-type",'application/x-www-form-urlencoded'/*file['Content-Type']*/);
+								//xhr.setRequestHeader("Content-type",'multipart/form-data; '/*file['Content-Type']*/);
 								xhr.setRequestHeader('api-key','kUom8sAaqB94NobFZpHibphC1x1iO7L1');
 								xhr.onload = function () {
-									console.log('done?');
 									$progress.html(100);
 									$progress.val(100);
+
+									if(!$('.file-list ul a:contains(file.fileId)').length){
+										$('.no-files').remove();
+										$('.file-list ul').prepend(app.templates['file-list-item']({files:[file.fileId]}));
+										app.bindEvents('home');
+									}
 
 									if(redirect === 'file'){
 										app.render({
@@ -172,6 +177,8 @@ var app = {
 				fileform += '<input type="text" name="description[]"/>';
 				fileform += '<input type="hidden" name="filename[]" value="'+file.name+'" />';
 				fileform += '</div>';
+
+				$('.no-files').remove();
 				$('.upload-file-list').append(fileform);
 			},
 			afterRender:function(){
@@ -231,9 +238,8 @@ var app = {
 						fileData:app.editor.getSession().getValue(),
 						description:_this.model.fileData.description
 					},
-					headers:{
-						'Content-Type':$('[name="Content-Type"]').val()
-					}
+					dataType:'multipart/form-data'
+
 				}, function(data){
 					app.render({
 						$el:$('.app-body'),

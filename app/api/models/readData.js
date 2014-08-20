@@ -35,10 +35,8 @@ module.exports = {
 				if(fileData.manualFile){
 					_this.app.response.end(fileData.content);
 				}else if(fileData.fileName){
-					var filestream = fs.createWriteStream(path + '../../../../' + 'private/files/' +fileData.fileName);
-					//file = filestream.pipe(filestream);
-					_this.app.response.pipe(filestream);
-					_this.app.response.end();
+					var filestream = fs.createReadStream(path + '../../../../' + 'private/files/' +fileData.fileId);
+					filestream.pipe(_this.app.response);
 				}
 				return false;
 			}

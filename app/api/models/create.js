@@ -16,7 +16,6 @@ var querystring = require('querystring');
 var mime = require('mime');
 module.exports = {
 	execute:function(params, cb){
-		var _this = this;
 		var model = {};
 		var fullBody = '';
 
@@ -110,7 +109,6 @@ module.exports = {
 					error:['Invalid filename.']
 				});
 			}
-
 		}
 	}
 };

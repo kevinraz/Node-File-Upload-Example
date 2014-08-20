@@ -18,6 +18,11 @@ var connect = require('connect');
 var http = require('http');
 var URL = require('url');
 
+/**
+ *  This is an NPM module I wrote for managing child processes
+ */
+var manager = require('instancejs-process-manager');
+
 // Include API and UI
 var api = require('./api/index.js');
 var ui = require('./ui/index.js');
@@ -59,7 +64,7 @@ module.exports = {
 		var app = connect()
 			.use(connect.timeout(600000))//timeout request in 2 minutes
 			.use(connect.cookieParser())
-			.use(connect.multipart())
+//			.use(connect.multipart())
 //			.use(connect.bodyParser())
 			.use(connect.query())
 			.use(connect.static('public'))
@@ -83,15 +88,17 @@ module.exports = {
 
 	/**
 	 * createServer
-	 * This is separate so if we decide to use cluster we can wrap
-	 * our connect server in the callback of a process manager.
+	 * This is separate so we can use cluster and can wrap
+	 * our connect server in the callback of the process manager.
 	 *
 	 * @param {int} port
 	 * @param {object} app
 	 * @returns {object}
 	 */
 	createServer:function(port, app){
-		return http.createServer(app).listen(port);
+		manager.startProcessManager({ debug:true },function(){
+			return http.createServer(app).listen(port);
+		});
 	},
 
 

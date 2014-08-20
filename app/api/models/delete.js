@@ -28,7 +28,7 @@ module.exports = {
 						var fileData = JSON.parse(data);
 
 						fs.unlink(pathname, function(){
-							fs.unlink(path + '../../../../' + 'private/files/' + fileData.fileName, function(){
+							fs.unlink(path + '../../../../' + 'private/files/' + fileData.fileId, function(){
 								cb({
 									view:'removed'
 								});
