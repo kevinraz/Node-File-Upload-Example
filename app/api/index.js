@@ -144,7 +144,7 @@ module.exports = {
 
 			this.end(json, {
 				code:code,
-				contentType:'text/json'
+				contentType:'application/json'
 			});
 		}
 	},
@@ -161,7 +161,7 @@ module.exports = {
 
 		this.end(json, {
 			code:404,
-			contentType:'text/json'
+			contentType:'application/json'
 		});
 	},
 
@@ -179,11 +179,12 @@ module.exports = {
 		}, options);
 
 		if(typeof output === 'object'){
-			options.contentType = 'text/json';
+			options.contentType = 'application/json';
 			output = JSON.stringify(output);
 		}
-
-		this.app.response.writeHead(options.code, {"Content-Type": options.contentType});
+		if(!this.app.response['_headerSent']){
+			this.app.response.writeHead(options.code, {"Content-Type": options.contentType});
+		}
 		this.app.response.write(output);
 		this.app.response.end();
 

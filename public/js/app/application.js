@@ -71,13 +71,24 @@ var app = {
 						url:url,
 						method:method,
 						data:$form.serialize(),
-						contentType:false
+						headers:{
+							'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+						}
 					}, function(file){
-						if(!$('.file-list ul a:contains(file.fileId)').length){
+						var add = true;
+						$('.file-list ul a').each(function(i, el){
+							var $el = $(el);
+							if($el.text() === file.fileId){
+								add = false;
+							}
+						});
+						if(add){
 							$('.no-files').remove();
-							$('.file-list ul').prepend(app.templates['file-list-item']({files:[file.fileData.fileId]}));
+							$('.file-list ul').prepend(app.templates['file-list-item']({files:[file.fileId]}));
 							app.bindEvents('home');
 						}
+
+
 						app.render({
 							$el:$('.app-body'),
 							view:file.view,
@@ -110,7 +121,15 @@ var app = {
 									$progress.html(100);
 									$progress.val(100);
 
-									if(!$('.file-list ul a:contains(file.fileId)').length){
+
+									var add = true;
+									$('.file-list ul a').each(function(i, el){
+										var $el = $(el);
+										if($el.text() === file.fileId){
+											add = false;
+										}
+									});
+									if(add){
 										$('.no-files').remove();
 										$('.file-list ul').prepend(app.templates['file-list-item']({files:[file.fileId]}));
 										app.bindEvents('home');
@@ -238,7 +257,9 @@ var app = {
 						fileData:app.editor.getSession().getValue(),
 						description:_this.model.fileData.description
 					},
-					dataType:'multipart/form-data'
+					headers:{
+						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+					}
 
 				}, function(data){
 					app.render({
@@ -335,7 +356,7 @@ var app = {
 					method:method,
 					data:data,
 					headers:{
-						'Content-Type':$('[name="Content-Type"]').val()
+						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 					}
 				}, function(data){
 					$('[data-filename="'+$btn+'"] a').html('<i class="icon"></i>' + $form.find('#name').val().replace(/%20| /g, ''));
