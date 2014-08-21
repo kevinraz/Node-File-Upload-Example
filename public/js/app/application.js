@@ -88,7 +88,6 @@ var app = {
 							app.bindEvents('home');
 						}
 
-
 						app.render({
 							$el:$('.app-body'),
 							view:file.view,
@@ -414,7 +413,7 @@ var app = {
 	bindEvents:function(viewName){
 		_.each(app.views[viewName].events, function(funcName, binding){
 			var ev = binding.split(/ (.+)?/);
-			$(ev[1]).off(ev[0], app.views[viewName][funcName]).on(ev[0], app.views[viewName][funcName].bind(app.views[viewName]));
+			$(ev[1]).off(ev[0]).on(ev[0], app.views[viewName][funcName].bind(app.views[viewName]));
 		});
 	},
 	unbindEvents:function(viewName){
