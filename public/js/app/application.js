@@ -84,7 +84,7 @@ var app = {
 						});
 						if(add){
 							$('.no-files').remove();
-							$('.file-list ul').prepend(app.templates['file-list-item']({files:[file.fileId]}));
+							$('.file-list ul').prepend(app.templates['file-list-item']({files:[(file.fileData || {}).fileId]}));
 							app.bindEvents('home');
 						}
 
