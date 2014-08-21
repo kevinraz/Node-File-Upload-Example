@@ -96,7 +96,7 @@ module.exports = {
 	 * @returns {object}
 	 */
 	createServer:function(port, app){
-		manager.startProcessManager({ debug:true },function(){
+		manager.startProcessManager(function(){
 			return http.createServer(app).listen(port);
 		});
 	},
