@@ -16,6 +16,10 @@ git clone git@github.com:kevinraz/Node-File-Upload-Example.git
 ### Start service:
 ```bash
 cd /projects/Node-File-Upload-Example/
+npm install
+```
+
+```bash
 node index.js
 ```
 
